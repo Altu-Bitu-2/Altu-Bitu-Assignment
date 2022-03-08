@@ -13,7 +13,7 @@ int main() {
 	for (int i = 0; i < q; i++) {
 		cin >> T;
 		if (T == 3) {
-			if (current < 0) current+= TIME;
+			
 			cout << current/3600 <<" "<< (current/60)%60<< " " << current%60 << "\n";
 		}
 		else {
@@ -23,6 +23,7 @@ int main() {
 			}
 			else if (T == 2) {
 				current = (current - c) % TIME;
+				if (current < 0) current+= TIME;
 			}
 		}
 	}

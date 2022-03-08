@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-using namespace std;	
+using namespace std;
 int main() {
 	int N;
 	cin >> N;
@@ -9,12 +9,12 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		cin >> cost[i];
 	}
-	sort(cost.begin(), cost.end());
-	reverse(cost.begin(), cost.end());
+	sort(cost.begin(), cost.end(), greater<>());
 	long long money = 0;
 	for (int i = 0; i < N; i++) {
-		int tip=cost[i] - i;
-		if (tip >= 0) money += tip;
+		int tip = cost[i] - i;
+		if (tip < 0) break;
+		money += tip;
 	}
 	cout << money;
 }

@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+typedef pair<int, int> int_pair;
 using namespace std;	
-bool cmp(const pair<int,int> &a, const pair<int, int>&b) {
+bool cmp(const int_pair &a, const int_pair&b) {
 	if (a.second == b.second) 
 		return a.first < b.first;
 	return a.second < b.second;
@@ -10,7 +11,7 @@ bool cmp(const pair<int,int> &a, const pair<int, int>&b) {
 int main() {
 	int N;
 	cin >> N;
-	vector<pair<int, int>> arr(N);
+	vector<int_pair> arr(N);
 	for (int i = 0; i < N; i++) {
 		cin >> arr[i].first >> arr[i].second;
 	}

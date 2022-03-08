@@ -16,8 +16,7 @@ int main() {
 		cin >> B[i];
 	} 
 	sort(A.begin(), A.end());
-	sort(B.begin(), B.end());
-	reverse(B.begin(), B.end());
+	sort(B.begin(), B.end(), greater<>);
 	for (int i = 0; i < N; i++) {
 		answer += A[i] * B[i];
 	}
