@@ -14,9 +14,9 @@ int sumOfNum(string s) {
 bool cmp(const string& a, const string& b) {
 	if (a.length()!=b.length()) 
 		return a.length() < b.length();
-	if (sumOfNum(a) == sumOfNum(b)) 
-		return a < b;
-	return sumOfNum(a) < sumOfNum(b);
+	if (sumOfNum(a) != sumOfNum(b)) 
+		return sumOfNum(a) < sumOfNum(b);
+	return a < b;
 }
 int main() {
 	int N;
