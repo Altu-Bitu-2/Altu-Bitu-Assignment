@@ -13,20 +13,12 @@ string palindrome() {
 	}
 	return temp;
 }
-void findStr(char s) {
-	//해당 알파벳 개수 저장
-	if (m.find(s) != m.end()) {
-		m[s] += 1;
-	}
-	else {
-		m.insert(make_pair(s, 1));
-	}
-}
 int main() {
 	string str;
 	cin >> str;
 	for (int i = 0; i < str.length(); i++) {
-		findStr(str[i]);
+		//map에 존재하지 않는 key를 참조하면 자동으로 insert연산이 실행된다.
+		m[str[i]]++;
 	}
 	int odd = 0;
 	char odd_char;

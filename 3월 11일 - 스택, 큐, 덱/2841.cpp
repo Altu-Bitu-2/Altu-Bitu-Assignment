@@ -9,32 +9,16 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		int line, fret;
 		cin >> line >> fret;
-		if (v[line].empty()) {
-			//비어있으면 그냥 스택에 넣기
-			v[line].push_back(fret);
+		//손 떼가는 과정
+		while (!v[line].empty() && v[line].back() > fret) {
 			cnt++;
+			v[line].pop_back();
 		}
-		else {
-			//fret이 더 크면 바로 스택에 넣기
-			if (v[line].back() < fret) {
-				v[line].push_back(fret);
-				cnt++;
-			}
-			else if (v[line].back() == fret) {
-				continue;
-			}
-			else {
-				//fret이 스택의 top값보다 커질때까지 pop
-				while (v[line].back() > fret) {
-					v[line].pop_back();
-					cnt++;
-				}
-				if (v[line].back() == fret) continue;
-				else {
-					v[line].push_back(fret);
-					cnt++;
-				}
-			}
+		//누르고 있는 손이 없거나 가장 뒤의 fret이 현재 입력보다 작은데 같진 않을 때
+		//바로 누를 수 있음
+		if (v[line].empty() || v[line].back() != fret) {
+			cnt++;
+			v[line].push_back(fret);
 		}
 	}
 	cout << cnt;
