@@ -25,8 +25,8 @@ int main() {
 		for (int i = 0; i < temp.size(); i++) {
 			if (temp[i]) sum += card[i];
 		}
-		if (sum <= M && (M - sum < M - answer)) {
-			answer = sum;
+		if (sum <= M) {
+			answer = max(answer, sum);
 		}
 	} while (next_permutation(temp.begin(), temp.end()));
 	cout << answer;

@@ -1,20 +1,19 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+const int CHESS = 64;
 char chessboard(int x, int y) {
 	if ((x + y) % 2 == 0) return 'W';
 	else return 'B';
 }
 int check(vector<vector<char>>&chess, int x, int y) {
-	int black = 0;
-	int white = 0;
 	int cnt = 0;
 	for (int i = x; i < x + 8; i++) {
 		for (int j = y; j < y + 8; j++) {
 			if (chess[i][j] != chessboard(i, j)) cnt++;
 		}
 	}
-	return min(cnt, 64-cnt);
+	return min(cnt, CHESS-cnt);
 }
 int main() {
 	int N, M;

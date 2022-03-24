@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 using namespace std;
+typedef pair<int, int> pi;
 map<int, bool> num;
 void init() {
 	for (int i = 123; i <= 987; i++) {
@@ -12,31 +13,36 @@ void init() {
 		num[i] = true;
 	}
 }
+pi guessResult(string tmp, string guess) {
+	pi result;
+	for (int i = 0; i < 3; i++) {
+		int index = tmp.find(guess[i]);
+		if (index != string::npos) {
+			if (index == i) result.first++;
+			else result.second++;
+		}
+	}
+	return result;
+}
 void baseball(string guess, int strike, int ball) {
 	for (auto iter : num) {
 		//같은 위치에 숫자가 있으면 strike
 		//같은 위치에는 없지만 숫자가 있으면 ball
 		if (!iter.second) continue;
 		string tmp = to_string(iter.first);
-		int s = 0, b = 0;
-		for (int j = 0; j < 3; j++) {
-			for (int k = 0; k < 3; k++) {
-				if (j == k && tmp[j] == guess[k]) s++;
-				if (j != k && tmp[j] == guess[k]) b++;
-			}
-		}
-		if (s != strike || b != ball) num[iter.first] = false;
+		pi result = guessResult(tmp, guess);
+		if (result.first != strike || result.second != ball) num[iter.first] = false;
 	}
 }
 int main() {
 	int N;
 	//123~987까지의 숫자 중에서 입력 조건과 일치하는 숫자만 남김
-	cin >> N;	
+	cin >> N;
 	init();
 	while (N--) {
 		string guess;
 		int strike, ball;
-		cin >> guess >> strike >> ball;	
+		cin >> guess >> strike >> ball;
 		baseball(guess, strike, ball);
 	}
 	int cnt = 0;

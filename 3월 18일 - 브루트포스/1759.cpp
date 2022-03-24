@@ -8,7 +8,6 @@ vector <bool> init(int L, int C) {
 	for (int i = 0; i < L; i++) {
 		arr[i] = true;
 	}
-	sort(arr.begin(), arr.end());
 	return arr;
 }
 vector<string> createPassword(int L, int C, vector<char> &alphabet) {
@@ -30,7 +29,7 @@ vector<string> createPassword(int L, int C, vector<char> &alphabet) {
 			sort(password.begin(), password.end());
 			answer.push_back(password);
 		}
-	} while (next_permutation(temp.begin(), temp.end()));
+	} while (prev_permutation(temp.begin(), temp.end()));
 	return answer;
 }
 int main() {
