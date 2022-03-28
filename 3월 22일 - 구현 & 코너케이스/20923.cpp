@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <deque>
-using namespace std;	
+using namespace std;
 deque<int> player[2];
 deque<int> ground[2];
 void takeCard(int winner, int loser) {
@@ -16,11 +16,12 @@ void takeCard(int winner, int loser) {
 		ground[winner].pop_back();
 	}
 }
-void play() {
+bool play(int turn) {
 	//자신의 그라운드에 카드를 내려놓음
-	ground[turn].push_front(player[turn].front());
+	int card = player[turn].front();
+	ground[turn].push_front(card);
 	player[turn].pop_front();
-	if (player[turn].empty()) break;
+	if (player[turn].empty()) return false;
 	//카드 숫자 합이 5이면 수연 승
 	if (!ground[0].empty() && !ground[1].empty()) {
 		if (ground[0].front() + ground[1].front() == 5) {
@@ -28,9 +29,10 @@ void play() {
 		}
 	}
 	//가장 위 카드가 5면 도도 승
-	if ((!ground[0].empty()&&ground[0].front() == 5) || (!ground[1].empty()&&ground[1].front() == 5)) {
+	if (card== 5) {
 		takeCard(0, 1);
 	}
+	return true;
 }
 int main() {
 	int N, M;
@@ -46,10 +48,10 @@ int main() {
 
 	int turn = 0;
 	while (M--) {
-		play();
+		if (!play(turn)) break;
 		turn = 1 - turn;
 	}
-	
+
 	if (player[0].size() > player[1].size()) cout << "do";
 	else if (player[0].size() < player[1].size()) cout << "su";
 	else cout << "dosu";

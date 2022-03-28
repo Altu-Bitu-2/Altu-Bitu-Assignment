@@ -7,37 +7,39 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 	int T;
-	cin >> T;	
-	set<int>s;
+	cin >> T;
+	vector<bool> num(21, false);
 	while (T--) {
 		string op;
-		int n;
-		cin >> op;
+		int n = 0;
+		cin >> op;		
+		if (op == "all") {
+			for (int i = 1; i <= 20; i++) {
+				num[i] = true;
+			}
+			continue;
+		}
+		if (op == "empty") {
+			for (int i = 1; i <= 20; i++) {
+				num[i] = false;
+			}
+			continue;
+		}
+		cin >> n;
 		if (op == "add") {
-			cin >> n;
-			s.insert(n);
+			num[n] = true;
 		}
 		else if (op == "check") {
-			cin >> n;
-			if (s.find(n) !=s.end()) cout << "1"<<"\n";
+			if (num[n]) cout << "1" << "\n";
 			else cout << "0" << "\n";
 		}
 		else if (op == "remove") {
-			cin >> n;
-			s.erase(n);
+			num[n] = false;
 		}
 		else if (op == "toggle") {
-			cin >> n;
-			if (s.find(n) != s.end()) s.erase(n);
-			else s.insert(n);
+			if (num[n]) num[n] = false;
+			else num[n] = true;
 		}
-		else if (op == "all") {
-			for (int i = 1; i <= 20; i++) {
-				s.insert(i);
-			}
-		}
-		else if (op == "empty") {
-			s.clear();
-		}
+
 	}
 }
