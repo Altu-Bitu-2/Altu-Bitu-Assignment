@@ -10,8 +10,9 @@ void backtracking(int from, int cost, int cnt) {
 	//cost가 최소값보다 커지는 순간 가지치기
 	if (cost > answer) return;
 	//모든 도시를 돌고 시작점까지의 길이 있을 때
-	if (cnt == N && W[from][0] != 0) {
-		answer = min(answer, cost + W[from][0]);
+	if (cnt == N) {
+		if (W[from][0] != 0)
+			answer = min(answer, cost + W[from][0]);
 		return;
 	}
 	for (int to = 0; to < N; to++) {
