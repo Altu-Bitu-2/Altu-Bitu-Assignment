@@ -21,10 +21,9 @@ bool check(pi p) {
 	//같은 구역에 같은 숫자가 있는지
 	for (int i = 3 * x; i < 3 * x + 3; i++) {
 		for (int j = 3 * y; j < 3 * y + 3; j++) {
-			if (board[i][j] == board[p.first][p.second])
-				if (i != p.first && j != p.second) {
-					return false;
-				}
+			if (i == p.first|| j == p.second) continue;
+			if (board[i][j] == board[p.first][p.second]) 
+				return false;
 		}
 	}
 	return true;

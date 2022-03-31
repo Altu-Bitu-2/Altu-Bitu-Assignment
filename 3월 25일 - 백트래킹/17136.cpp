@@ -41,16 +41,14 @@ void backtracking(int x, int y, int cnt) {
 		return;
 	}
 
-	if (v[x][y] == 1) {
-		for (int i = 1; i <= 5; i++) {
-			if (x + i > 10 || y + i > 10 || paper[i - 1] == 0) continue;
-			if (isStickable(x, y, i)) {
-				stick(x, y, i, 0);
-				paper[i - 1]--;
-				backtracking(x, y + 1, cnt+1);
-				stick(x, y, i, 1);
-				paper[i - 1]++;
-			}
+	for (int i = 5; i >= 5; i--) {
+		if (x + i > 10 || y + i > 10 || paper[i - 1] == 0) continue;
+		if (isStickable(x, y, i)) {
+			stick(x, y, i, 0);
+			paper[i - 1]--;
+			backtracking(x, y + 1, cnt + 1);
+			stick(x, y, i, 1);
+			paper[i - 1]++;
 		}
 	}
 
