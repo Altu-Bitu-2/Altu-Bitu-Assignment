@@ -4,8 +4,7 @@
 #include <algorithm>
 using namespace std;
 typedef pair<int, int> pi;
-int getClassNum(int N, vector<pi> &v) {
-	int cnt = 1;
+int getClassNum(int N, vector<pi>& v) {
 	priority_queue<int, vector<int>, greater<int>>pq;
 	pq.push(0);
 	for (int i = 0; i < N; i++) {
@@ -14,10 +13,9 @@ int getClassNum(int N, vector<pi> &v) {
 		int prev = pq.top();
 		if (start >= prev) pq.pop();
 		//새로운 방 배정
-		else cnt++;		
 		pq.push(end);
 	}
-	return cnt;
+	return pq.size();
 }
 int main() {
 	int N;
