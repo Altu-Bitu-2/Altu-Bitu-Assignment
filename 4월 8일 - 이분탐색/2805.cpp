@@ -1,33 +1,35 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <ctime>
 using namespace std;
-vector <int> tree;
-int binarySearch(int low, int high, int M) {
-	int answer = 0;
-	while (low <= high) {
-		int H = (low + high) / 2;	
-		long long cnt = 0;
-		for (int i = 0; i < tree.size(); i++) {
-			if (tree[i] - H > 0) cnt = cnt+ tree[i] - H;
+int cutTree(int N, int M, vector<long long>& tree) {
+	long long left = 0;
+	long long right = tree[N - 1];
+	long long answer = 0;
+	while (left <= right) {
+		long long total = 0;
+		long long mid = (left + right) / 2;
+		for (int i = 0; i < N; i++) {
+			if (tree[i] - mid > 0) total += tree[i] - mid;
 		}
-		if (cnt < M) high = H - 1;
+		//나무가 모자르면 높이를 낮춰 베어야 함
+		if (total < M) right = mid - 1;
 		else {
-			if (answer < H) answer = H;
-			low = H + 1;
+			answer = max(answer, mid);
+			left = mid + 1;
 		}
 	}
 	return answer;
 }
-
 int main() {
-	int N, M; //나무 수, 필요한 나무 길이
+	int N, M;
 	cin >> N >> M;
-	tree.resize(N);
+	vector<long long> tree(N);
 	for (int i = 0; i < N; i++) {
-		scanf_s("%d", &tree[i]);
+		cin >> tree[i];
 	}
 	sort(tree.begin(), tree.end());
-	printf("%d",binarySearch(0, tree.back(), M));
+	//나무는 최소 10m, 최대 20m 벨 수 있음
+	cout << cutTree(N, M, tree);
+
 }
