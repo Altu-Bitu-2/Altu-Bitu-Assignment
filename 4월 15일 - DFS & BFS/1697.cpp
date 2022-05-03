@@ -4,10 +4,7 @@
 #include <algorithm>
 #define MAX 100001
 using namespace std;
-int N, K;
-vector <bool> visited;
-queue <pair <int, int>> q;
-int cnt = 0;
+
 int bfs(int start) {
 	visited[start] = true;
 	q.push({ start, cnt });
@@ -32,6 +29,10 @@ int bfs(int start) {
 	return cnt;
 }
 int main() {
+	int N, K;
+	vector <bool> visited;
+	queue <pair <int, int>> q;
+	int cnt = 0;
 	cin >> N >> K;
 	visited.assign(MAX, false);
 	cout <<bfs(N);

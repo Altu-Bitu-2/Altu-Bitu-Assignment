@@ -12,16 +12,14 @@ int steal(vector<int>& v, int N, int M, int K) {
 	}
 	//N과 M이 같을 때
 	if (N == M) {
-		if (sum < K) return 1;
-		else return 0;
+		return sum < K;
 	}
 	//윈도우의 크기를 M으로 하고 옆으로 한칸씩 민다
-	while (left<N) {
+	while (left < N) {
 		if (sum < K) cnt++;
-		sum -= v[left];
-		left++;
-		right++;
-		sum += v[right];
+		sum -= v[left++];
+		sum += v[++right % N];
+
 	}
 	return cnt;
 }
@@ -31,14 +29,10 @@ int main() {
 	while (T--) {
 		int N, M, K;
 		cin >> N >> M >> K;
-		vector<int> v(N+M);
+		vector<int> v(N);
 		for (int i = 0; i < N; i++) {
 			cin >> v[i];
 		}
-		//M-1개수만큼 뒤에 더 추가해줌
-		for (int i = 0; i < M-1; i++) {
-			v[i + N] = v[i];
-		}
-		cout << steal(v, N, M, K) <<"\n";
+		cout << steal(v, N, M, K) << "\n";
 	}
 }

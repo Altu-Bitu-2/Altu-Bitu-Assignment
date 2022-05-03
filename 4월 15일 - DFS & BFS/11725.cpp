@@ -18,10 +18,10 @@ void dfs(int node) {
 	}
 }
 int main() {
-	int N;
-	cin >> N;
-	visited.assign(N + 1, false);
-	for (int i = 0; i < N-1; i++) {
+	int n;
+	cin >> n;
+	visited.assign(n + 1, false);
+	for (int i = 0; i < n-1; i++) {
 		int x, y;
 		cin >> x >> y;
 		//서로 연결시켜줌
@@ -29,7 +29,7 @@ int main() {
 		v[y].push_back(x);
 	}
 	dfs(1);
-	for (int i = 2; i <= N; i++) {
+	for (int i = 2; i <= n; i++) {
 		cout << parent[i] << "\n";
 	}
 }
